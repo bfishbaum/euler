@@ -1,0 +1,46 @@
+#Solved
+def readFile(path):
+    with open(path, "rt") as f:
+        return f.read()
+
+code = readFile("resources/59.txt")
+code = code[:-1]
+code = [int(x) for x in code.split(',')]
+
+
+def xorStrings(str1,str2):
+	mixed = [(str1[x],str2[x]) for x in range(len(str1))]
+	return [c[0]^c[1] for c in mixed]
+
+def decodeString(str1,key):
+	len1 = len(str1)
+	key = (key*(len1//len(key)+1))[:len1]
+	text = xorStrings(str1,key)
+	return text
+
+
+def keysLength(l):
+	result = []
+	for i in range(26**l):
+		keyList = []
+		for j in range(l-1,-1,-1):
+			keyList.append(i//(26**j)%26)
+		keyList = [c+97 for c in keyList]
+		result += [keyList]
+	return result
+
+dic = ['the','will','not','one','euler','math','code','key','for','that','then','there']
+def testLanguage(text,dic):
+	words = 0
+	for x in dic:
+		if x in text.lower():
+			words += 1
+	return words > 3
+
+keys = keysLength(3)
+for key in keys:
+	z = decodeString(code,key)
+	text = ''.join(chr(int(c)) for c in z)
+	if(testLanguage(text,dic)):
+		print(text)
+		print(sum(z))
