@@ -25,21 +25,13 @@ def isPrime(x):
 def concat(a,b):
 	return a * 10 ** (int(math.log(b,10))+1) + b
 
-def memoized(f):
-    # You are not responsible for how this decorator works
-    # on the inside, just how to use it!
-    import functools
-    cachedResults = dict()
-    @functools.wraps(f)
-    def wrapper(*args):
-        if args not in cachedResults:
-            cachedResults[args] = f(*args)
-        return cachedResults[args]
-    return wrapper
-
-@memoized
+match_dict = {}
 def isMatch(a,b):
-	return isPrime(concat(a,b)) and isPrime(concat(b,a))
+	if(a > b):
+		a,b = b,a
+	if((a,b) not in match_dict):
+		match_dict[(a,b)] =  isPrime(concat(a,b)) and isPrime(concat(b,a))
+	return match_dict[(a,b)]
 
 def isLegit(x):
 	for i in range(1,len(x)):
@@ -61,4 +53,4 @@ def findList(prev,primes):
 				return z
 	return None
 #sieve1 = [3] + [i for i in sieve if i % 3 == 1]
-print(findList([],sieve))
+print(sum(findList([],sieve)))
