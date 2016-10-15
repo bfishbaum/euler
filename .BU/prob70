@@ -1,0 +1,6 @@
+import prime
+def totient(x):
+	factors = prime.primeFactorsExclusive(x)
+	product = 1
+	for factor in factors
+	

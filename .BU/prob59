@@ -3,7 +3,7 @@ def readFile(path):
     with open(path, "rt") as f:
         return f.read()
 
-code = readFile("resources/59.txt")
+code = readFile("resources/59")
 code = code[:-1]
 code = [int(x) for x in code.split(',')]
 
