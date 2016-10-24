@@ -1,8 +1,9 @@
 #Solved
 import prime as pi
 import permutations as pr
-from numpy import prod
+#from numpy import prod
 import math
+
 def minProSum(k):
 	global last
 	for i in range(k,2*k):	
@@ -33,6 +34,7 @@ def findProSumFactors(a,num,n,sums):
 	while(sum1 < b):
 		z = b-sum1
 		for pair in factorPairs:
+			print(pair)
 			s1 = sum(pair)
 			s2 = prod(pair)
 			if(s2-s1 == z):
@@ -58,11 +60,8 @@ set1 = set()
 log = 2
 for k in range(2,12001):
 	t = minProSum(k)
-	print(k,t)
+	#print(k,t)
 	set1.add(t)
-	if(k > log):
-		print(log)
-		log = int(log*1.5)
 
 print(sum(list(set1)))
 	
